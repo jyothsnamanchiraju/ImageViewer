@@ -1,4 +1,5 @@
 import React, {Component} from 'react'; 
+import ReactDOM from 'react-dom'; 
 import './Login.css'; 
 import Header from '../../common/header/Header'; 
 
@@ -10,6 +11,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import InputLabel from '@material-ui/core/InputLabel'; 
 import Input from '@material-ui/core/Input';  
 import Button from '@material-ui/core/Button'; 
+import Home from '../home/Home';
 
 
 class Login extends Component{
@@ -20,7 +22,8 @@ class Login extends Component{
             username: "", 
             passwordRequired: "dispNone", 
             password:"", 
-            incorrectUsernamePassword: "dispNone"
+            incorrectUsernamePassword: "dispNone", 
+            allFieldsCorrect: "no"
         }
     }
 
@@ -34,7 +37,13 @@ class Login extends Component{
 
     loginClickHandler = () =>{
           this.state.username === "" ? this.setState({usernameRequired: "dispBlock"}) : this.setState({usernameRequired: "dispNone"}); 
-          this.state.password === "" ? this.setState({passwordRequired: "dispBlock"}) : this.setState({passwordRequired: "dispNone"}); 
+          this.state.password === "" ? this.setState({passwordRequired: "dispBlock" }) : this.setState({passwordRequired: "dispNone"}); 
+
+          this.state.username !=="" && this.state.password != "" ? this.setState({allFieldsCorrect: "yes"}) : this.setState({allFieldsCorrect: "no"});
+          
+          if(this.state.allFieldsCorrect === "yes"){
+              ReactDOM.render(<Home/>, document.getElementById('root')); 
+          }
     }
 
     render(){
