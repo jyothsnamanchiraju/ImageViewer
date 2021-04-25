@@ -1,0 +1,49 @@
+/*.login-form{
+    display: flex; 
+    flex-direction: column;
+    justify-content: space-around;
+    
+}*/ 
+/*
+.form-control {
+    margin: 20px;
+    min-width: 240px; 
+    max-width: 240px
+} 
+
+.login-title {
+    color: black; 
+}
+*/ 
+
+.hdr{
+    height: 205; 
+    width: 100%;
+}
+.body{
+    height: 80%;
+    width: 100%;
+    display: flex; 
+    justify-content: center;
+}
+
+.card-style{
+    display: flex; 
+    width: 30%;
+    height: 50%; 
+    justify-content: center;
+}
+
+.login-title{
+    font-size: 18px; 
+}
+
+.input-fields{
+    width: 340px; 
+    margin: 10px; 
+}
+
+.card-cnt{
+    margin: 20px; 
+    padding: 20px; 
+}
