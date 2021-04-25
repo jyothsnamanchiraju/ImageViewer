@@ -1,23 +1,5 @@
-/*.login-form{
-    display: flex; 
-    flex-direction: column;
-    justify-content: space-around;
-    
-}*/ 
-/*
-.form-control {
-    margin: 20px;
-    min-width: 240px; 
-    max-width: 240px
-} 
-
-.login-title {
-    color: black; 
-}
-*/ 
-
 .hdr{
-    height: 205; 
+    height: 20%; 
     width: 100%;
 }
 .body{
@@ -46,4 +28,16 @@
 .card-cnt{
     margin: 20px; 
     padding: 20px; 
+}
+
+.red{
+    color: red; 
+}
+
+.dispNone{
+    display: none; 
+}
+
+.dispBlock{
+    display: block;
 }

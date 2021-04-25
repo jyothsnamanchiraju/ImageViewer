@@ -9,27 +9,13 @@ import Typography from '@material-ui/core/Typography';
 import  {makeStyles} from '@material-ui/core/styles';
 
 import FormControl from '@material-ui/core/FormControl'; 
+import FormHelperText from '@material-ui/core/FormHelperText'; 
 import InputLabel from '@material-ui/core/InputLabel'; 
 import Input from '@material-ui/core/Input';  
 import Button from '@material-ui/core/Button'; 
 
-/*const cardStyles = theme =>({
-    root: {
-        minWidth: 275,
-      },
-    formControl:{
-        margin: theme.spacing.unit, 
-        minWidth: 240, 
-        maxWidth: 240
-    }, 
-    formTitle:{
-        color: theme.palette.primary.light
-    }
-}); */ 
- 
-/**<span className= {classes.formTitle} > Login </span> */
 
-const styles =  theme =>({
+/*const styles =  theme =>({
     root: {
         minWidth: 275, 
     }, 
@@ -42,14 +28,33 @@ const styles =  theme =>({
         minWidth: 240,
         maxWidth: 240
      }
-}); 
+});  */ 
 
 class Login extends Component{
-   
+    constructor(){
+        super(); 
+        this.state={
+            usernameRequired: "dispNone", 
+            username: "", 
+            passwordRequired: "dispNone", 
+            password:""
+        }
+    }
+
+    inputUsernameChangeHandler = (e) =>{
+      e.target.value !== " " && e.target.value !== null ?   this.setState({username: e.target.value}): this.setState({usernameRequired: "dispBlock"});       
+    }    
+
+    inputPasswordChangeHandler = (e) =>{
+       this.setState({password: e.target.value}); 
+    }
+
+    loginClickHandler = () =>{
+          this.state.username === "" ? this.setState({usernameRequired: "dispBlock"}) : this.setState({usernameRequired: "dispNone"}); 
+          this.state.password === "" ? this.setState({passwordRequired: "dispBlock"}) : this.setState({passwordRequired: "dispNone"}); 
+    }
 
     render(){
-      const {classes} = this.props;
-
         return (
             <div> 
                 <div className="hdr">
@@ -62,14 +67,20 @@ class Login extends Component{
                             <br/>
                         <FormControl className="input-fields" required>
                             <InputLabel htmlFor="username"> Username </InputLabel>
-                            <Input id="username" type="text"></Input>
+                            <Input id="username" type="text" username={this.state.username} onChange={this.inputUsernameChangeHandler}></Input>
+                            <FormHelperText className={this.state.usernameRequired}> 
+                                <span className="red"> required </span>
+                            </FormHelperText>
                         </FormControl><br/> <br/>
                         <FormControl className="input-fields" required>
                             <InputLabel htmlFor="password"> Password </InputLabel>
-                            <Input id="password" type="password"></Input>
+                            <Input id="password" type="password" password={this.state.password} onChange={this.inputPasswordChangeHandler}></Input>
+                            <FormHelperText className={this.state.passwordRequired}>
+                                <span className="red"> required </span>
+                            </FormHelperText>
                         </FormControl><br/><br/>  
                         <FormControl> 
-                            <Button variant="contained" color="primary">Login</Button>
+                            <Button variant="contained" color="primary" onClick={this.loginClickHandler}>Login</Button>
                         </FormControl> <br/><br/>
                         </CardContent>
                     </Card>
@@ -79,8 +90,5 @@ class Login extends Component{
     }
 }
 
-Login.propTypes={
-    classes: PropTypes.object.isRequired, 
-}; 
 
 export default Login; 
