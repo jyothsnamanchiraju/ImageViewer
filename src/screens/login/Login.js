@@ -1,12 +1,9 @@
 import React, {Component} from 'react'; 
 import './Login.css'; 
 import Header from '../../common/header/Header'; 
-import PropTypes from 'prop-types';
+
 import Card from '@material-ui/core/Card'; 
 import CardContent from '@material-ui/core/CardContent'; 
-import CardActions from '@material-ui/core/CardActions'; 
-import Typography from '@material-ui/core/Typography'; 
-import  {makeStyles} from '@material-ui/core/styles';
 
 import FormControl from '@material-ui/core/FormControl'; 
 import FormHelperText from '@material-ui/core/FormHelperText'; 
@@ -15,21 +12,6 @@ import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button'; 
 
 
-/*const styles =  theme =>({
-    root: {
-        minWidth: 275, 
-    }, 
-    title: {
-        fontSize: 14, 
-    },
-
-    formControl: {
-        margin: theme.spacing.unit,
-        minWidth: 240,
-        maxWidth: 240
-     }
-});  */ 
-
 class Login extends Component{
     constructor(){
         super(); 
@@ -37,7 +19,8 @@ class Login extends Component{
             usernameRequired: "dispNone", 
             username: "", 
             passwordRequired: "dispNone", 
-            password:""
+            password:"", 
+            incorrectUsernamePassword: "dispNone"
         }
     }
 
@@ -78,9 +61,12 @@ class Login extends Component{
                             <FormHelperText className={this.state.passwordRequired}>
                                 <span className="red"> required </span>
                             </FormHelperText>
+                            <FormHelperText className={this.state.incorrectUsernamePassword}>
+                                <span className="red"> Incorrect username and/or password </span>
+                            </FormHelperText>
                         </FormControl><br/><br/>  
                         <FormControl> 
-                            <Button variant="contained" color="primary" onClick={this.loginClickHandler}>Login</Button>
+                            <Button variant="contained" color="primary" onClick={this.loginClickHandler} className="login-btn">Login</Button>
                         </FormControl> <br/><br/>
                         </CardContent>
                     </Card>

@@ -41,3 +41,7 @@
 .dispBlock{
     display: block;
 }
+
+.login-btn{
+    cursor: pointer; 
+}
