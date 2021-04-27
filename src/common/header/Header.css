@@ -1,12 +1,39 @@
 .app-header{
     background-color: #263238;
     height: 50px;
+    display: flex; 
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .app-title{
     color: #fff; 
     font-size: 18px; 
-    float: left; 
     padding: 5px 5px 5px 5px; 
     margin: 5px 5px 5px 5px; 
+}
+
+.right{
+    display: flex; 
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 5px; 
+    padding: 5px; 
+}
+
+.search-box{
+    border-radius: 4px;
+    width: 300px;
+    background-color: #c0c0c0;
+    margin-right: inherit;
+}
+.profile-icon{
+    margin-left: inherit;
+    position: relative;
+    background-color: silver;
+}
+.profile-select{
+    /*background-color: silver;*/ 
+    width: 70px;
+    height: 30px;
 }

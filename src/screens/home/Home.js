@@ -3,11 +3,13 @@ import './Home.css';
 import Header from '../../common/header/Header'; 
 
 class Home extends Component{
-    render(){
+
+    render(){      
+       
         return (
             <div> 
                 <Header/>
-                <span>HomePage</span>
+                <span>HomePage</span> 
             </div>
         )
     }
