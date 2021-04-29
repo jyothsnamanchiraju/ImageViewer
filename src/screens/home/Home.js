@@ -25,7 +25,6 @@ import GridListTile from '@material-ui/core/GridListTile';
 
 class Home extends Component{
 
-
   constructor(){
     super(); 
     this.state={
@@ -46,7 +45,7 @@ class Home extends Component{
         return (
             <div> 
               <div className="home-hdr">
-                <Header/>
+                <Header flag="homePage"/>
               </div>
               <div className="home-body">
               <div className="grid-root">
@@ -91,12 +90,9 @@ class Home extends Component{
                           </Card>  
                           </GridListTile>
                     ))}  
-<<<<<<< Updated upstream
-=======
                </GridList>
               </div>
               </div>
->>>>>>> Stashed changes
             </div>
         )
     }

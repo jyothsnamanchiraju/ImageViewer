@@ -50,7 +50,7 @@ class Login extends Component{
         return (
             <div> 
                 <div className="hdr">
-                <Header/>
+                <Header flag="loginPage"/>
                 </div>
                 <div className="body"> 
                     <Card className="card-style">

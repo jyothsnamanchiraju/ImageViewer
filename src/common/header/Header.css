@@ -37,3 +37,10 @@
     width: 70px;
     height: 30px;
 }
+
+.hdr-dispNone{
+    display: none; 
+}
+.hdr-dispBlock{
+    display: block; 
+}
