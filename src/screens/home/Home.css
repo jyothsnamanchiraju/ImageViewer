@@ -6,4 +6,74 @@
 
 .dispNone{
     display: none; 
+
+}
+
+.grid-style{
+    width: 100px; 
+    height : 100px;  
+}   
+
+.image-card{
+    height: 200px; 
+    width: 150px; 
+    margin: 10px;
+    display: flex;      
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.root{
+    width: 500px; 
+    height: 700px;
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: radius 10px; 
+    /*max-width: 345px; */ 
+  } 
+.avatar{
+    background-color: red;
+}
+
+.media {
+    height: 40%;
+    width: 80%; 
+    padding-top : 56.25%; 
+   
+  }
+
+  .card-content{
+      width: 100%; 
+      display: flex; 
+      flex-direction: column;
+      justify-content: center;
+      align-items: center; 
+  }
+  .caption{
+      font-size: 20pt;
+      margin-bottom: 0; 
+      padding-bottom: 0;  
+  }
+  .hash{
+      color: skyblue; 
+      font-size: 12pt;
+      margin-top: 0;
+      padding-top: 0;
+  }
+
+  .like{
+      align-items:baseline; 
+  }
+.add-comment{
+    display: flex;
+    flex-direction: row;   
+    justify-content: flex-start;
+    align-items: baseline; 
+} 
+.cmt-btn{
+    align-items: center;
+
 }
