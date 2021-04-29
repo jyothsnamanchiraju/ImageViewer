@@ -25,6 +25,7 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 
 class Home extends Component{
 
+
   constructor(){
     super(); 
     this.state={
@@ -82,7 +83,6 @@ class Home extends Component{
                             </CardContent>
                           </Card>  
                     ))}  
-                
             </div>
         )
     }
