@@ -19,9 +19,9 @@ import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import Button from '@material-ui/core/Button'; 
-import { GridList } from '@material-ui/core';
+import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile'; 
-import GridListTileBar from '@material-ui/core/GridListTileBar'; 
+
 
 class Home extends Component{
 
@@ -45,11 +45,17 @@ class Home extends Component{
 
         return (
             <div> 
+              <div className="home-hdr">
                 <Header/>
-                
-                    {imageData.map(image => (
-                          
-                          <Card className="root">
+              </div>
+              <div className="home-body">
+              <div className="grid-root">
+                 
+                <GridList cellHeight={800} cols={2} className="grid-list">
+                    
+                      {imageData.map(image => (
+                        <GridListTile key={image.id}>
+                          <Card className="card-root">
                             <CardHeader
                                 avatar={
                                   <Avatar aria-label="cardheader" className="avatar">
@@ -64,12 +70,13 @@ class Home extends Component{
                                 title={image.username}
                                 subheader={image.timestamp}
                               />
-                              <CardMedia
+                             
+                            <CardContent className="card-content">
+                                <CardMedia
                                   className="media"
                                   image={image.media_url}
-                                  title="Paella dish"
+                                  title="image"
                                 />  
-                            <CardContent className="card-content">
                               <span className="caption"> <this.generateCaption a={image.id}/></span>
                               <span className="hash">#hashtag1 #hastag2 #hashtag3</span>
                               <span className="like"> <FavoriteBorderOutlinedIcon fontSize="large"/> <span > likes </span></span>
@@ -77,12 +84,19 @@ class Home extends Component{
                               <div> 
                                 <FormControl className="add-comment"> 
                                   <Input placeholder="Add a comment"></Input>
-                                  <Button variant="contained" color="primary">Add</Button>
+                                  <Button className="cmt-btn" variant="contained" color="primary">Add</Button>
                                 </FormControl>
                               </div>
                             </CardContent>
                           </Card>  
+                          </GridListTile>
                     ))}  
+<<<<<<< Updated upstream
+=======
+               </GridList>
+              </div>
+              </div>
+>>>>>>> Stashed changes
             </div>
         )
     }
