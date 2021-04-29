@@ -2,18 +2,11 @@
     height: 20%; 
     width: 100%;
 }
-<<<<<<< Updated upstream
-
-.dispNone{
-    display: none; 
-
-=======
 .home-body{
     height: auto;
     width: 100%;
     display: flex; 
     justify-content: space-around;
->>>>>>> Stashed changes
 }
 
 .grid-root{
@@ -29,20 +22,15 @@
 .grid-list{
     width: auto;
     height: 100%;
-    margin:10px; 
 }
 
 
 .card-root{
-   /* width: 500px; 
-    height: 700px;*/
-
     display: flex; 
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border: radius 10px; 
-    /*max-width: 345px; */ 
   } 
 
 .avatar{
@@ -87,10 +75,5 @@
 } 
 .cmt-btn{
     align-items: center;
-<<<<<<< Updated upstream
-
-}
-=======
 }
 
->>>>>>> Stashed changes

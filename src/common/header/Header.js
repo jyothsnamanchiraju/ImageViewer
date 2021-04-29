@@ -1,12 +1,14 @@
 import React, {Component} from 'react'; 
 import './Header.css'; 
-
+import Profile from '../../screens/profile/Profile'; 
+import Login from '../../screens/login/Login'; 
 import Input from '@material-ui/core/Input'; 
 
 import SearchIcon from '@material-ui/icons/Search';
 import FormControl from '@material-ui/core/FormControl'; 
 import Select from '@material-ui/core/Select'; 
-import InputLabel from '@material-ui/core/InputLabel';
+
+import ReactDOM from 'react-dom'; 
 
 
 class Header extends Component{ 
@@ -14,6 +16,7 @@ class Header extends Component{
         super(); 
         this.state={ 
             search: "",
+            dispflag:"dispNone", 
             value: "Profile", 
             option:""
     } 
@@ -30,26 +33,42 @@ class Header extends Component{
     }
       
    selectProfileHandler = () =>{
-        console.log("Profile selected"); 
+        console.log("Profile selected");
+            ReactDOM.render(<Profile/>, document.getElementById('root')); 
     }
 
     selectLogoutHandler = () => {
         console.log("Logout selected"); 
+        ReactDOM.render(<Login/>, document.getElementById('root')); 
     }  
-    
-   
-    render(){    
+       
+
+    render(){ 
+
         return(
             <div>
                 <header> 
                 <div className="app-header">
                     <div className="app-title"> Image Viewer </div> 
-                    <div className="right">
-                        <div className="search-box">
-                            <SearchIcon/>
-                            <Input id="search" type="text" search={this.state.search} placeholder="search" onChange={this.inputSearchChangeHandler}/>  
-                        </div>
-                        <div className="profile-icon">
+
+                    <div  id="right" className="right">
+                        {
+                        (this.props.flag ==="loginPage") 
+                        ? 
+	                        <div className="search-box" style={{display: 'none'}}>
+                                <SearchIcon/>
+                                <Input id="search" type="text" search={this.state.search} placeholder="search" onChange={this.inputSearchChangeHandler}/>  
+                            </div>
+                        :    
+                            <div className="search-box" style={{display: 'block'}}>
+                                <SearchIcon/>
+                                <Input id="search" type="text" search={this.state.search} placeholder="search" onChange={this.inputSearchChangeHandler}/>  
+                            </div>
+                        }
+                        {
+                        (this.props.flag ==="loginPage") 
+                        ? 
+                        <div className="profile-icon" style={{display: 'none'}}>
                             <FormControl>
                                     <Select className="profile-select" id="openbtn" value={this.state.value} onChange={this.profileMenuHandler}>
                                         <option aria-label="None" value="" disabled></option>
@@ -58,7 +77,18 @@ class Header extends Component{
                                     </Select>
                             </FormControl>
                         </div>
-                    </div>
+                        :
+                        <div className="profile-icon" style={{display: 'block'}}>
+                            <FormControl>
+                                    <Select className="profile-select" id="openbtn" value={this.state.value} onChange={this.profileMenuHandler}>
+                                        <option aria-label="None" value="" disabled></option>
+                                        <option value="Profile" onClick={this.selectProfileHandler}> Profile </option>
+                                        <option value="Logout"  onClick={this.selectLogoutHandler}> LogOut </option>
+                                    </Select>
+                            </FormControl>
+                        </div>
+                        }
+                    </div>     
                 </div>          
                 </header>   
             </div>   
