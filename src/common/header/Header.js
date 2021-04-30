@@ -2,12 +2,14 @@ import React, {Component} from 'react';
 import './Header.css'; 
 import Profile from '../../screens/profile/Profile'; 
 import Login from '../../screens/login/Login'; 
+import Home from '../../screens/home/Home'; 
 import Input from '@material-ui/core/Input'; 
 
 import SearchIcon from '@material-ui/icons/Search';
 import FormControl from '@material-ui/core/FormControl'; 
 import Select from '@material-ui/core/Select'; 
 import Divider from '@material-ui/core/Divider';
+import Button from '@material-ui/core/Button'; 
 
 import ReactDOM from 'react-dom'; 
 
@@ -42,6 +44,10 @@ class Header extends Component{
         console.log("Logout selected"); 
         ReactDOM.render(<Login/>, document.getElementById('root')); 
     }  
+
+    imageViewHandler = () =>{
+        ReactDOM.render(<Home/>, document.getElementById('root')); 
+    }
    /**
     * The <Header> element takes the property 'flag'
     * if this.props.flag is "loginPage", it indicates that the Header Element is invoked by Login.js
@@ -55,8 +61,13 @@ class Header extends Component{
             <div>
                 <header> 
                 <div className="app-header">
-                    <div className="app-title"> Image Viewer </div> 
-
+                    {
+                        (this.props.flag ==="profilePage") 
+                        ?
+                            <div className="app-title"> <Button variant="contained" color="default" onClick={this.imageViewHandler}>Image Viewer </Button> </div> 
+                        :    
+                            <div className="app-title"> Image Viewer </div> 
+                    }
                     <div  id="right" className="right">
                         {
                         (this.props.flag ==="homePage") 
