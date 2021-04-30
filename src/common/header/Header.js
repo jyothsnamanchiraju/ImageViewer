@@ -42,7 +42,12 @@ class Header extends Component{
         console.log("Logout selected"); 
         ReactDOM.render(<Login/>, document.getElementById('root')); 
     }  
-       
+   /**
+    * The <Header> element takes the property 'flag'
+    * if this.props.flag is "loginPage", it indicates that the Header Element is invoked by Login.js
+    * if this.props.flag is "homePage", it indicates that the Header Element is invoked by Home.js
+    * if this.props.flag is "profilePage", it indicates that the Header Element is invoked by Profile.js
+    */    
 
     render(){ 
 
@@ -54,42 +59,40 @@ class Header extends Component{
 
                     <div  id="right" className="right">
                         {
-                        (this.props.flag ==="loginPage") 
+                        (this.props.flag ==="homePage") 
                         ? 
-	                        <div className="search-box" style={{display: 'none'}}>
-                                <SearchIcon/>
-                                <Input id="search" type="text" search={this.state.search} placeholder="search" onChange={this.inputSearchChangeHandler}/>  
-                            </div>
-                        :    
                             <div className="search-box" style={{display: 'block'}}>
                                 <SearchIcon/>
                                 <Input id="search" type="text" search={this.state.search} placeholder="search" onChange={this.inputSearchChangeHandler}/>  
                             </div>
+                        :    
+                            <div></div>
                         }
                         {
-                        (this.props.flag ==="loginPage") 
+                        (this.props.flag ==="homePage") 
                         ? 
-                        <div className="profile-icon" style={{display: 'none'}}>
-                            <FormControl>
-                                    <Select className="profile-select" id="openbtn" value={this.state.value} onChange={this.profileMenuHandler} >
-                                        <option aria-label="None" value="" disabled></option>
-                                        <option value="Profile" onClick={this.selectProfileHandler}> Profile </option>
-                                        <option value="Logout"  onClick={this.selectLogoutHandler}> LogOut </option>
-                                    </Select>
-                            </FormControl>
+                            <div className="profile-icon" style={{display: 'block'}}>
+                                <FormControl>
+                                        <Select className="profile-select" id="openbtn" value={this.state.value} onChange={this.profileMenuHandler}>
+                                            <option aria-label="None" value="" disabled></option>
+                                            <Divider/>
+                                            <option value="Profile" onClick={this.selectProfileHandler}> Profile </option>
+                                            <Divider/>
+                                            <option value="Logout"  onClick={this.selectLogoutHandler}> LogOut </option>
+                                        </Select>
+                                </FormControl>
                         </div>
+                        : (this.props.flag ==="profilePage") 
+                        ?
+                            <div className="profile-icon" style={{display: 'block'}}>
+                                <FormControl>
+                                        <Select className="profile-select" id="openbtn" value={this.state.value} onChange={this.profileMenuHandler}>
+                                            <option value="Logout"  onClick={this.selectLogoutHandler}> LogOut </option>
+                                        </Select>
+                                </FormControl>
+                            </div>
                         :
-                        <div className="profile-icon" style={{display: 'block'}}>
-                            <FormControl>
-                                    <Select className="profile-select" id="openbtn" value={this.state.value} onChange={this.profileMenuHandler}>
-                                        <option aria-label="None" value="" disabled></option>
-                                        <Divider/>
-                                        <option value="Profile" onClick={this.selectProfileHandler}> Profile </option>
-                                        <Divider/>
-                                        <option value="Logout"  onClick={this.selectLogoutHandler}> LogOut </option>
-                                    </Select>
-                            </FormControl>
-                        </div>
+                            <div></div>
                         }
                     </div>     
                 </div>          
