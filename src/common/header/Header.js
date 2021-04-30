@@ -7,6 +7,7 @@ import Input from '@material-ui/core/Input';
 import SearchIcon from '@material-ui/icons/Search';
 import FormControl from '@material-ui/core/FormControl'; 
 import Select from '@material-ui/core/Select'; 
+import Divider from '@material-ui/core/Divider';
 
 import ReactDOM from 'react-dom'; 
 
@@ -70,7 +71,7 @@ class Header extends Component{
                         ? 
                         <div className="profile-icon" style={{display: 'none'}}>
                             <FormControl>
-                                    <Select className="profile-select" id="openbtn" value={this.state.value} onChange={this.profileMenuHandler}>
+                                    <Select className="profile-select" id="openbtn" value={this.state.value} onChange={this.profileMenuHandler} >
                                         <option aria-label="None" value="" disabled></option>
                                         <option value="Profile" onClick={this.selectProfileHandler}> Profile </option>
                                         <option value="Logout"  onClick={this.selectLogoutHandler}> LogOut </option>
@@ -82,7 +83,9 @@ class Header extends Component{
                             <FormControl>
                                     <Select className="profile-select" id="openbtn" value={this.state.value} onChange={this.profileMenuHandler}>
                                         <option aria-label="None" value="" disabled></option>
+                                        <Divider/>
                                         <option value="Profile" onClick={this.selectProfileHandler}> Profile </option>
+                                        <Divider/>
                                         <option value="Logout"  onClick={this.selectLogoutHandler}> LogOut </option>
                                     </Select>
                             </FormControl>
