@@ -37,11 +37,7 @@ class Home extends Component{
   return c.caption; 
 }
     render(){      
-        const classes = this.props; 
-        let arr = []; 
-        arr = imageCaption.data; 
-   //     const classes = useStyles(); 
-
+      
         return (
             <div> 
               <div className="home-hdr">
