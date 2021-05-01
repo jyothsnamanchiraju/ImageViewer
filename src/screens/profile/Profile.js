@@ -27,6 +27,8 @@ class Profile extends Component{
         this.state={
             editFullNamemodalOpen: false, 
             editImagemodalOpen: false, 
+            imageObj: {},
+            imageCaption: "",
             imageurl: "" 
         }
     }
@@ -38,10 +40,12 @@ class Profile extends Component{
         this.setState({editFullNamemodalOpen: false});
     }
 
-   editImageHandler = (imgid) => {
-    console.log("image id= "+ imgid); 
-      this.setState({editImagemodalOpen: true, imageurl: imgid}); 
-      console.log("state image id= "+ this.state.imageurl); 
+   editImageHandler = (img) => {
+     let iC= {}; 
+     iC= imageCaption.data.filter((d)=>{return(d.id === img.id)})[0]; 
+     this.setState({editImagemodalOpen: true, imageObj: img, imageCaption: iC.caption}); 
+     
+     
    } 
 
     closeImageModalHandler = () =>{
@@ -49,7 +53,6 @@ class Profile extends Component{
     }
     render(){
         let loggedinUser = userData.filter((user)=>{return(user.id==="1")})[0]; 
-        let editImagemodalOpen= false; 
 
         const editNameModalBody = (
             <div className="disp-modal">
@@ -64,13 +67,6 @@ class Profile extends Component{
             </div>
           );
          
-            
-   /*     const editImageModalBody = (
-                <div > 
-                    <p>Modal Content</p>
-                </div>
-        );    
-*/ 
 
         return (
         <div>
@@ -108,9 +104,9 @@ class Profile extends Component{
                     <div className="profile-image-posts-grid">
                     <GridList cellHeight={180}  style={{ width: '80%', height: 'auto'}} >
                         {
-                        imageData.filter(i => i.username==="user1").map((img) =>( 
+                        imageData.filter(i => i.username=== loggedinUser.username).map((img) =>( 
                             
-                                <GridListTile key={img.media_url} style={{margin: 0, width: '30%', height:'auto', marginRight:0, marginBottom:0}} value={img.id} onClick={()=> this.editImageHandler(img.media_url)}>
+                                <GridListTile key={img.media_url} style={{margin: 0, width: '30%', height:'auto', marginRight:0, marginBottom:0}} value={img.id} onClick={()=> this.editImageHandler(img)}>
                                     <img src={img.media_url} alt="image" style={{height: '100%', width:'100%'}}/>   
                                 </GridListTile>      
                             ))
@@ -123,20 +119,21 @@ class Profile extends Component{
                                 
                             <div className="image-modal">
                                     <div style={{width:'50%'}}>
-                                    <img src={this.state.imageurl} id="image-content" style={{alignItems:'start', margin:'10px', marginRight: 0}}/>
+                                    <img src={this.state.imageObj.media_url} id="image-content" style={{alignItems:'start', margin:'10px', marginRight: 0, width:'90%', height:'90%'}}/>
                                     </div>
                                     <div id= "image-details" style={{display: 'flex', flexDirection: 'column', justifyContent:'flex-start', margin:'5px', marginLeft: 0, width:'50%'}}>
                                         <div style={{display: 'flex', flexDirection:'row', justifyContent:'space-evenly', alignItems:'space-between'}}>
                                            <Avatar style= {{ width: '50px', height: '50px', color: 'theme.palette.getContrastText(deepPurple[500])', backgroundColor: '#734FB1'}}> 
+                                                {this.state.imageObj.username}
                                            </Avatar>
-                                           <h4> UserName </h4>
+                                           <h4> {this.state.imageObj.username}</h4>
                                         </div>   
                                         <div>
                                             <Divider/>
-                                            <div style={{fontSize: '25px'}}> Caption </div>
+                                            <div style={{fontSize: '25px'}}> {this.state.imageCaption} </div>
                                             <div style={{color:'#64D4E3', fontSize:'15px'}}> #hashtags </div>
                                             <div style={{width:'100%', height:'90%'}}>
-                                                <span>usename:  </span>
+                                                <span> {this.state.imageObj.username}usename:  </span>
                                                 <span>comments</span>
                                             </div>
                                             <div>
