@@ -53,7 +53,9 @@ class Home extends Component{
                           <Card className="card-root">
                             <CardHeader
                                 avatar={
-                                  <Avatar aria-label="cardheader" className="avatar">
+                                  <Avatar aria-label="cardheader" className="avatar" 
+                                  style={{color: 'theme.palette.getContrastText(deepPurple[500])', 
+                                    backgroundColor: '#734FB1', width:'60px', height:'60px'}}>
                                    {image.username}
                                   </Avatar>
                                 }
