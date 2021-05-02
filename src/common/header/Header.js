@@ -32,21 +32,18 @@ class Header extends Component{
 
     profileMenuHandler = (e) =>{
         this.setState({option: e.target.value})
-        console.log("option= " + this.state.option); 
     }
       
    selectProfileHandler = () =>{
-        console.log("Profile selected");
-            ReactDOM.render(<Profile/>, document.getElementById('root')); 
+            ReactDOM.render(<Profile  currentusername={this.props.currentusername}/>, document.getElementById('root')); 
     }
 
     selectLogoutHandler = () => {
-        console.log("Logout selected"); 
         ReactDOM.render(<Login/>, document.getElementById('root')); 
     }  
 
     imageViewHandler = () =>{
-        ReactDOM.render(<Home/>, document.getElementById('root')); 
+        ReactDOM.render(<Home currentusername={this.props.currentusername}/>, document.getElementById('root')); 
     }
    /**
     * The <Header> element takes the property 'flag'

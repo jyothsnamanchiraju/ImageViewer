@@ -52,8 +52,8 @@ class Profile extends Component{
         this.setState({editImagemodalOpen: false});
     }
     render(){
-        let loggedinUser = userData.filter((user)=>{return(user.id==="1")})[0]; 
-
+        let loggedinUser = userData.filter((user)=>{return(user.username=== this.props.currentusername )})[0]; 
+        
         const editNameModalBody = (
             <div className="disp-modal">
               <h2 id="modal-title" style={{alignItems:'center', margin:'10px'}}>Edit</h2>
@@ -71,7 +71,7 @@ class Profile extends Component{
         return (
         <div>
             <div className="profile-hdr">
-                <Header flag="profilePage"/>
+                <Header flag="profilePage" currentusername={this.props.currentusername}/>
             </div>
             <div className="profile-body"> 
                     <div className="profile-information-section"> 
@@ -133,7 +133,7 @@ class Profile extends Component{
                                             <div style={{fontSize: '25px'}}> {this.state.imageCaption} </div>
                                             <div style={{color:'#64D4E3', fontSize:'15px'}}> #hashtags </div>
                                             <div style={{width:'100%', height:'90%'}}>
-                                                <span> {this.state.imageObj.username}usename:  </span>
+                                                <span> {this.state.imageObj.username}:  </span>
                                                 <span>comments</span>
                                             </div>
                                             <div>
