@@ -41,14 +41,14 @@ class Home extends Component{
         return (
             <div> 
               <div className="home-hdr">
-                <Header flag="homePage"/>
+                <Header flag="homePage"  currentusername={this.props.currentusername}/>
               </div>
               <div className="home-body">
               <div className="grid-root">
                  
                 <GridList cellHeight={800} cols={2} className="grid-list">
                     
-                      {imageData.map(image => (
+                {imageData.filter(i => i.username ===this.props.currentusername).map(image => (
                         <GridListTile key={image.id}>
                           <Card className="card-root">
                             <CardHeader

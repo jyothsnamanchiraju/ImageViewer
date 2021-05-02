@@ -12,6 +12,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';  
 import Button from '@material-ui/core/Button'; 
 import Home from '../home/Home';
+import userData from '../../common/userData'; 
 
 
 class Login extends Component{
@@ -23,7 +24,7 @@ class Login extends Component{
             passwordRequired: "dispNone", 
             password:"", 
             incorrectUsernamePassword: "dispNone", 
-            allFieldsCorrect: "no"
+            allFieldsCorrect: "no", 
         }
     }
 
@@ -42,7 +43,7 @@ class Login extends Component{
           this.state.username !=="" && this.state.password !== "" ? this.setState({allFieldsCorrect: "yes"}) : this.setState({allFieldsCorrect: "no"});
           
           if(this.state.allFieldsCorrect === "yes"){
-              ReactDOM.render(<Home/>, document.getElementById('root')); 
+              ReactDOM.render(<Home currentusername={this.state.username}/>, document.getElementById('root')); 
           }
     }
 
