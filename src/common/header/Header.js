@@ -20,7 +20,7 @@ class Header extends Component{
         this.state={ 
             search: "",
             dispflag:"dispNone", 
-            value: "Profile", 
+            value: "", 
             option:""
     } 
 
@@ -35,7 +35,7 @@ class Header extends Component{
     }
       
    selectProfileHandler = () =>{
-            ReactDOM.render(<Profile  currentusername={this.props.currentusername}/>, document.getElementById('root')); 
+            ReactDOM.render(<Profile  currentusername={this.props.currentusername} commentArray={this.props.commentArray}/>, document.getElementById('root')); 
     }
 
     selectLogoutHandler = () => {
@@ -81,8 +81,7 @@ class Header extends Component{
                         ? 
                             <div className="profile-icon" style={{display: 'block'}}>
                                 <FormControl>
-                                        <Select className="profile-select" id="openbtn" value={this.state.value} onChange={this.profileMenuHandler}>
-                                            <option aria-label="None" value="" disabled></option>
+                                        <Select className="profile-select" id="openbtn" value="Profile" onChange={this.profileMenuHandler}>
                                             <Divider/>
                                             <option value="Profile" onClick={this.selectProfileHandler}> Profile </option>
                                             <Divider/>
@@ -94,7 +93,7 @@ class Header extends Component{
                         ?
                             <div className="profile-icon" style={{display: 'block'}}>
                                 <FormControl>
-                                        <Select className="profile-select" id="openbtn" value={this.state.value} onChange={this.profileMenuHandler}>
+                                        <Select className="profile-select" id="openbtn" value="Logout" onChange={this.profileMenuHandler}>
                                             <option value="Logout"  onClick={this.selectLogoutHandler}> LogOut </option>
                                         </Select>
                                 </FormControl>
