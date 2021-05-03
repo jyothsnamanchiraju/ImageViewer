@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import './Home.css'; 
 import Header from '../../common/header/Header'; 
 
-import userData from '../../common/userData'; 
-import imageData from '../../common/imageData'; 
-import imageCaption from '../../common/imageCaption'; 
+//import userData from '../../common/userData'; 
+//import imageData from '../../common/imageData'; 
+//import imageCaption from '../../common/imageCaption'; 
 
 import Card from '@material-ui/core/Card'; 
 import CardContent from '@material-ui/core/CardContent'; 
@@ -24,10 +24,11 @@ import GridListTile from '@material-ui/core/GridListTile';
 import { InputLabel } from '@material-ui/core';
 
 
+
 class Home extends Component{
 
-  constructor(){
-    super(); 
+  constructor(props){
+    super(props); 
     this.state={
           username: "",
           imageid:"", 
@@ -36,16 +37,59 @@ class Home extends Component{
         username: "",
         imageid:"", 
         cmt: ""
-      }]  
-      
+      }], 
+      accessToken: props.accessToken,
+      imageData:[{
+        id: "",
+        media_type: "",
+        media_url: "",
+        username: "",
+        timestamp: ""
+      }],   
+    
+     imageCaptionData:[{
+          id: "", 
+          caption:""
+        }]  
+    
     }
   }
 
 
- generateCaption = (props) =>{
-  var c = imageCaption.data.filter((img)=>{return(img.id===props.a)})[0]; 
-  return c.caption; 
-}
+  componentWillMount(){
+    this.setState({imageCaptionData: this.props.imageCaptionData}); 
+    let accessTkn = this.props.accessToken; 
+    let that = this; 
+
+    that.props.imageCaptionData.map(icd =>{      
+      if(icd.id !=="" && icd.id!== null && icd.id!==undefined)
+      {
+                  let imgId = icd.id; 
+
+                  let imgDataUrl = "https://graph.instagram.com/"+ imgId +"?fields=id,media_type,media_url,username,timestamp&access_token="+accessTkn;             
+
+                  let imgdata = null; 
+                  let imgXhr = new XMLHttpRequest(); 
+
+                  imgXhr.addEventListener("readystatechange", function(){
+                        if(this.readyState === 4){
+                          var imgdetails = that.state.imageData.concat(JSON.parse(this.responseText)); 
+                          that.setState({imageData : imgdetails}); 
+                        }
+                  });
+
+                  imgXhr.open("GET",imgDataUrl);
+                  imgXhr.setRequestHeader("Cache-Control","no-cache");
+                  imgXhr.send(imgdata);    
+     } }); 
+  }
+ 
+
+/* generateCaption = (props) =>{
+   //let that = this; 
+  var c  = this.state.imageCaptionData.filter((img)=>{return(img.id===props.a)})[0].caption; 
+  return c; 
+}*/ 
 
 addCommentHandler =() =>{
   let commentObj={username: "", imageid:"", cmt:"" };
@@ -62,7 +106,7 @@ newCommentHandler =  (e) =>{
   this.setState({username: this.props.currentusername, imageid: e.target.id, cmt: e.target.value }); 
 }
 
-    render(){      
+    render(){     
 
         return (
             <div> 
@@ -74,7 +118,7 @@ newCommentHandler =  (e) =>{
                  
                 <GridList cellHeight={800} cols={2} className="grid-list">
                     
-                {imageData.filter(i => i.username ===this.props.currentusername).map(image => (
+                {this.state.imageData.map(image => (
                         <GridListTile key={image.id}>
                           <Card className="card-root">
                             <CardHeader
@@ -100,7 +144,7 @@ newCommentHandler =  (e) =>{
                                   image={image.media_url}
                                   title="image"
                                 />  
-                              <span className="caption"> <this.generateCaption a={image.id}/></span>
+                              <span className="caption"> </span>
                               <span className="hash">#hashtag1 #hastag2 #hashtag3</span>
                               <span className="like"> <FavoriteBorderOutlinedIcon fontSize="large"/> <span > likes </span></span>
                               <div className="comments" id="allcomments"> 
