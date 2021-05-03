@@ -38,7 +38,7 @@ class Header extends Component{
     }
       
    selectProfileHandler = () =>{
-            ReactDOM.render(<Profile  currentusername={this.props.currentusername} imageData={this.props.imageData} imageCaptionData={this.props.imageCaptionData} commentArray={this.props.commentArray}/>, document.getElementById('root')); 
+            ReactDOM.render(<Profile  currentusername={this.props.currentusername} accessToken={this.props.accessToken} imageData={this.props.imageData} imageCaptionData={this.props.imageCaptionData} commentArray={this.props.commentArray} dataRetrieved={this.props.dataRetrieved}/>, document.getElementById('root')); 
     }
 
     selectLogoutHandler = () => {
@@ -46,7 +46,7 @@ class Header extends Component{
     }  
 
     imageViewHandler = () =>{
-        ReactDOM.render(<Home currentusername={this.props.currentusername} imageData={this.props.imageData} imageCaptionData={this.props.imageCaptionData}/>, document.getElementById('root')); 
+        ReactDOM.render(<Home currentusername={this.props.currentusername} accessToken={this.props.accessToken} imageData={this.props.imageData} imageCaptionData={this.props.imageCaptionData} dataRetrieved={this.props.dataRetrieved}/>, document.getElementById('root')); 
     }
    /**
     * The <Header> element takes the property 'flag'
@@ -84,7 +84,8 @@ class Header extends Component{
                         ? 
                             <div className="profile-icon" style={{display: 'block'}}>
                                 <FormControl>
-                                        <Select className="profile-select" id="openbtn" value="Profile" onChange={this.profileMenuHandler}>
+                                        <Select className="profile-select" id="openbtn" value="Profile" defaultValue={'DEFAULT'} onChange={this.profileMenuHandler}>
+                                            <option value="DEFAULT" disabled> Choose </option>
                                             <Divider/>
                                             <option value="Profile" onClick={this.selectProfileHandler}> Profile </option>
                                             <Divider/>

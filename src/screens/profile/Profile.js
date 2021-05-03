@@ -73,8 +73,8 @@ class Profile extends Component{
     }
 
    editImageHandler = (img, commentArr) => {
-     let iC= {}; 
-     iC= imageCaption.data.filter((d)=>{return(d.id === img.id)})[0]; 
+     let iC= {id:"", caption:""}; 
+     iC= this.props.imageCaptionData.filter((d)=>{return(d.id === img.id)})[0]; 
      this.setState({editImagemodalOpen: true, imageObj: img, imageCaption: iC.caption, commentArray: commentArr});  
    } 
 
@@ -102,8 +102,9 @@ class Profile extends Component{
 
     render(){
 
-        let loggedinUser = userData.filter((user)=>{return(user.username=== this.props.currentusername )})[0];
-        let commentArr = this.props.commentArray;
+       // let loggedinUser = userData.filter((user)=>{return(user.username=== this.props.currentusername )})[0];
+       let loggedinUser = this.props.currentusername; 
+       let commentArr = this.props.commentArray;
 
         const editNameModalBody = (
             <div className="disp-modal">
@@ -136,10 +137,12 @@ class Profile extends Component{
                                             <div style={{fontSize: '25px'}}> {this.state.imageCaption} </div>
                                             <div style={{color:'#64D4E3', fontSize:'15px'}}> #hashtags </div>
                                             <div style={{width:'100%', height:'70%', color:'black'}}>
-                                                {
+                                             <ul>
+                                             {
                                              this.state.commentArray.filter(c =>(c.imageid === this.state.imageObj.id)).map((cObj) =>(
                                                 <li><b>{cObj.username}</b> : {cObj.cmt} </li> ))             
                                              }
+                                             </ul>
                                             </div>
                                             <div>
                                             <FavoriteBorderOutlinedIcon fontSize="large"/> <span > likes </span>
@@ -157,17 +160,17 @@ class Profile extends Component{
         return (
         <div>
             <div className="profile-hdr">
-                <Header flag="profilePage" currentusername={this.props.currentusername} imageData={this.state.imageData} imageCaptionData={this.state.imageCaptionData}/>
+                <Header flag="profilePage" currentusername={this.props.currentusername} accessToken={this.props.accessToken} imageData={this.props.imageData} imageCaptionData={this.props.imageCaptionData}/>
             </div>
             <div className="profile-body"> 
                     <div className="profile-information-section"> 
                         <div className="user-profile-pic">  
                                    <Avatar aria-label="cardheader" style= {{ width: "100px", height: "100px", color: "theme.palette.getContrastText(deepOrange[500])", backgroundColor: "#EC8167" }}>
-                                   {loggedinUser.username}
+                                   {loggedinUser}
                                   </Avatar> 
                         </div>
                         <div className="user-info">
-                                <div className="username">{loggedinUser.username} </div>
+                                <div className="username">{loggedinUser} </div>
                                 <div className="user-info-numbers">
                                     <div> Posts:        </div>
                                     <div> Follows:      </div>
@@ -190,7 +193,7 @@ class Profile extends Component{
                     <div className="profile-image-posts-grid">
                     <GridList cellHeight={180}  style={{ width: '80%', height: 'auto'}} >
                         {
-                        imageData.filter(i => i.username=== loggedinUser.username).map((img) =>( 
+                       this.props.imageData.filter(i => i.username=== loggedinUser).map((img) =>( 
                             
                                 <GridListTile key={img.media_url} style={{margin: 0, width: '30%', height:'auto', marginRight:0, marginBottom:0}} value={img.id} onClick={()=> this.editImageHandler(img, commentArr)}>
                                     <img src={img.media_url} alt="image" style={{height: '100%', width:'100%'}}/>   

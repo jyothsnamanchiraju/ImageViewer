@@ -16,8 +16,8 @@ import Home from '../home/Home';
 
 
 class Login extends Component{
-    constructor(){
-        super(); 
+    constructor(props){
+        super(props); 
         this.state={
             usernameRequired: "dispNone", 
             username: "", 
@@ -40,6 +40,7 @@ class Login extends Component{
     }
 
     componentDidMount(){ 
+
         let data = null; 
         let xhr = new XMLHttpRequest(); 
         let that = this; 
@@ -86,7 +87,7 @@ class Login extends Component{
          this.state.username === "user1"  && this.state.password === "user1" ? this.setState({allFieldsCorrect: "yes"}) : this.setState({incorrectUsernamePassword: "dispBlock", allFieldsCorrect: "no"}); 
 
           if(this.state.allFieldsCorrect === "yes"){
-             ReactDOM.render(<Home currentusername={this.state.loggedinUsername} imageCaptionData={this.state.imageCaptionData} accessToken={this.state.accessToken}/>, document.getElementById('root'));  
+             ReactDOM.render(<Home currentusername={this.state.loggedinUsername} imageCaptionData={this.state.imageCaptionData} accessToken={this.state.accessToken} dataRetrieved=""/>, document.getElementById('root'));  
           }
     }
 
