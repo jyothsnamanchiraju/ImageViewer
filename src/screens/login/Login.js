@@ -12,7 +12,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';  
 import Button from '@material-ui/core/Button'; 
 import Home from '../home/Home';
-import userData from '../../common/userData'; 
+
 
 
 class Login extends Component{
@@ -25,8 +25,32 @@ class Login extends Component{
             password:"", 
             incorrectUsernamePassword: "dispNone", 
             allFieldsCorrect: "no", 
+            accessToken:"IGQVJVRGZAmTGJRVmJUVzZA3dUk1VkZAPSWV3czd3VE1nQTdhQ3F4dEoxVXRXNzJjeHFyV0ZAPN082YWgwcWRoRDBPNjZAuU3NoSDcwWHp5VHRTQ0lBUEpFUXduLWZADbzRoUFY4a25NNEhUSU1jWThsMWZAzWQZDZD", 
+            imageCaptionData:[{
+                id: "", 
+                caption:""
+              }]
         }
     }
+
+    componentDidMount(){ 
+        let data = null; 
+        let xhr = new XMLHttpRequest(); 
+        let that = this; 
+        
+        let baseUrl = "https://graph.instagram.com/me/media?fields=id,caption&access_token="+this.state.accessToken; 
+        xhr.addEventListener("readystatechange", function(){
+            if(this.readyState ===4){
+              var joined = that.state.imageCaptionData.concat(JSON.parse(this.responseText).data); 
+              that.setState({imageCaptionData : joined}); 
+            }
+    
+        }); 
+    
+        xhr.open("GET", baseUrl); 
+        xhr.setRequestHeader("Cache-Control", "no-cache"); 
+        xhr.send(data);   
+    }    
 
     inputUsernameChangeHandler = (e) =>{
       e.target.value !== " " && e.target.value !== null ?   this.setState({username: e.target.value}): this.setState({usernameRequired: "dispBlock"});       
@@ -39,17 +63,16 @@ class Login extends Component{
     loginClickHandler = () =>{
           this.state.username === "" ? this.setState({usernameRequired: "dispBlock"}) : this.setState({usernameRequired: "dispNone"}); 
           this.state.password === "" ? this.setState({passwordRequired: "dispBlock" }) : this.setState({passwordRequired: "dispNone"}); 
-
-         // this.state.username !=="" && this.state.password !== "" ? this.setState({allFieldsCorrect: "yes"}) : this.setState({allFieldsCorrect: "no"});
                   
          this.state.username === "user1"  && this.state.password === "user1" ? this.setState({allFieldsCorrect: "yes"}) : this.setState({incorrectUsernamePassword: "dispBlock", allFieldsCorrect: "no"}); 
 
           if(this.state.allFieldsCorrect === "yes"){
-              ReactDOM.render(<Home currentusername={this.state.username}/>, document.getElementById('root')); 
+             ReactDOM.render(<Home currentusername={this.state.username} imageCaptionData={this.state.imageCaptionData} accessToken={this.state.accessToken}/>, document.getElementById('root'));  
           }
     }
 
     render(){
+        
         return (
             <div> 
                 <div className="hdr">

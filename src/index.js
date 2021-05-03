@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker'; 
 
-import Home from './screens/home/Home'; 
+//import Home from './screens/home/Home'; 
 
 import Login from './screens/login/Login'; 
+//import Controller from './screens/Controller'; 
 
 /*
 ReactDOM.render(
@@ -17,4 +18,5 @@ ReactDOM.render(
 
 
 ReactDOM.render(<Login/>, document.getElementById('root')); 
+//ReactDOM.render(<Controller/>, document.getElementById('root')); 
 registerServiceWorker(); 
