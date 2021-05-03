@@ -40,8 +40,10 @@ class Login extends Component{
           this.state.username === "" ? this.setState({usernameRequired: "dispBlock"}) : this.setState({usernameRequired: "dispNone"}); 
           this.state.password === "" ? this.setState({passwordRequired: "dispBlock" }) : this.setState({passwordRequired: "dispNone"}); 
 
-          this.state.username !=="" && this.state.password !== "" ? this.setState({allFieldsCorrect: "yes"}) : this.setState({allFieldsCorrect: "no"});
-          
+         // this.state.username !=="" && this.state.password !== "" ? this.setState({allFieldsCorrect: "yes"}) : this.setState({allFieldsCorrect: "no"});
+                  
+         this.state.username === "user1"  && this.state.password === "user1" ? this.setState({allFieldsCorrect: "yes"}) : this.setState({incorrectUsernamePassword: "dispBlock", allFieldsCorrect: "no"}); 
+
           if(this.state.allFieldsCorrect === "yes"){
               ReactDOM.render(<Home currentusername={this.state.username}/>, document.getElementById('root')); 
           }

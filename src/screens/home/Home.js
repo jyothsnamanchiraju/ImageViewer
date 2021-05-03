@@ -21,6 +21,7 @@ import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutline
 import Button from '@material-ui/core/Button'; 
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile'; 
+import { InputLabel } from '@material-ui/core';
 
 
 class Home extends Component{
@@ -28,20 +29,45 @@ class Home extends Component{
   constructor(){
     super(); 
     this.state={
-      loggedinUsername : "", 
+          username: "",
+          imageid:"", 
+          cmt: "",
+      commentArray: [{
+        username: "",
+        imageid:"", 
+        cmt: ""
+      }]  
+      
     }
   }
+
 
  generateCaption = (props) =>{
   var c = imageCaption.data.filter((img)=>{return(img.id===props.a)})[0]; 
   return c.caption; 
 }
+
+addCommentHandler =() =>{
+  let commentObj={username: "", imageid:"", cmt:"" };
+  commentObj.username= this.state.username; 
+  commentObj.imageid = this.state.imageid; 
+  commentObj.cmt= this.state.cmt; 
+ 
+  this.setState({commentArray: [...this.state.commentArray, commentObj]}); 
+  this.setState({cmt: ""}); 
+}
+
+newCommentHandler =  (e) =>{
+  console.log(e.target.value); 
+  this.setState({username: this.props.currentusername, imageid: e.target.id, cmt: e.target.value }); 
+}
+
     render(){      
-      
+
         return (
             <div> 
               <div className="home-hdr">
-                <Header flag="homePage"  currentusername={this.props.currentusername}/>
+                <Header flag="homePage"  currentusername={this.props.currentusername} commentArray={this.state.commentArray}/>
               </div>
               <div className="home-body">
               <div className="grid-root">
@@ -77,12 +103,18 @@ class Home extends Component{
                               <span className="caption"> <this.generateCaption a={image.id}/></span>
                               <span className="hash">#hashtag1 #hastag2 #hashtag3</span>
                               <span className="like"> <FavoriteBorderOutlinedIcon fontSize="large"/> <span > likes </span></span>
-                              <div className="comments" id="allcomments"> </div>
+                              <div className="comments" id="allcomments"> 
+                                {
+                                  this.state.commentArray.filter(c =>(c.imageid === image.id)).map((cObj) =>(
+                                  <li><b>{cObj.username}</b> : {cObj.cmt} </li> ))             
+                                } 
+                              </div>
                               <div> 
-                                <FormControl className="add-comment"> 
-                                  <Input placeholder="Add a comment"></Input>
-                                  <Button className="cmt-btn" variant="contained" color="primary">Add</Button>
-                                </FormControl>
+                              <FormControl className="add-comment"> 
+                                  <InputLabel htmlFor={(image.id)+ "comment"}></InputLabel>
+                                  <Input id={(image.id)} size={80} type="text" value ={this.state.cmt} placeholder="Add a comment" onChange={this.newCommentHandler}/>
+                                  <Button id={(image.id)}className="cmt-btn" variant="contained" color="primary" onClick={this.addCommentHandler}>Add</Button>
+                              </FormControl>  
                               </div>
                             </CardContent>
                           </Card>  
