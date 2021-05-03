@@ -22,6 +22,7 @@ import Button from '@material-ui/core/Button';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile'; 
 import { InputLabel } from '@material-ui/core';
+import { useLocation } from 'react-router';
 
 
 
@@ -38,6 +39,7 @@ class Home extends Component{
         imageid:"", 
         cmt: ""
       }], 
+      dataRetrieved: props.dataRetrieved, 
       accessToken: props.accessToken,
       imageData:[{
         id: "",
@@ -57,6 +59,8 @@ class Home extends Component{
 
 
   componentWillMount(){
+    if(this.props.dataRetrieved !=="true")
+    {
     this.setState({imageCaptionData: this.props.imageCaptionData}); 
     let accessTkn = this.props.accessToken; 
     let that = this; 
@@ -82,6 +86,7 @@ class Home extends Component{
                   imgXhr.setRequestHeader("Cache-Control","no-cache");
                   imgXhr.send(imgdata);    
      } }); 
+    }
   }
  
 
@@ -111,7 +116,7 @@ newCommentHandler =  (e) =>{
         return (
             <div> 
               <div className="home-hdr">
-                <Header flag="homePage"  currentusername={this.props.currentusername} imageData={this.state.imageData} imageCaptionData={this.state.imageCaptionData} commentArray={this.state.commentArray}/>
+                <Header flag="homePage"  currentusername={this.props.currentusername} accessToken={this.props.accessToken} imageData={this.state.imageData} imageCaptionData={this.props.imageCaptionData} commentArray={this.state.commentArray} dataRetrieved="true"/>
               </div>
               <div className="home-body">
               <div className="grid-root">
@@ -139,7 +144,7 @@ newCommentHandler =  (e) =>{
                               />
                              
                             <CardContent className="card-content">
-                                <CardMedia
+                                <CardMedia 
                                   className="media"
                                   image={image.media_url}
                                   title="image"
@@ -148,10 +153,12 @@ newCommentHandler =  (e) =>{
                               <span className="hash">#hashtag1 #hastag2 #hashtag3</span>
                               <span className="like"> <FavoriteBorderOutlinedIcon fontSize="large"/> <span > likes </span></span>
                               <div className="comments" id="allcomments"> 
+                              <ul>
                                 {
                                   this.state.commentArray.filter(c =>(c.imageid === image.id)).map((cObj) =>(
                                   <li><b>{cObj.username}</b> : {cObj.cmt} </li> ))             
                                 } 
+                              </ul>  
                               </div>
                               <div> 
                               <FormControl className="add-comment"> 
