@@ -25,11 +25,17 @@ class Login extends Component{
             password:"", 
             incorrectUsernamePassword: "dispNone", 
             allFieldsCorrect: "no", 
+            loggedinUsername:"", 
+                /* enter accessToken in the below field*/ 
             accessToken:"IGQVJVRGZAmTGJRVmJUVzZA3dUk1VkZAPSWV3czd3VE1nQTdhQ3F4dEoxVXRXNzJjeHFyV0ZAPN082YWgwcWRoRDBPNjZAuU3NoSDcwWHp5VHRTQ0lBUEpFUXduLWZADbzRoUFY4a25NNEhUSU1jWThsMWZAzWQZDZD", 
             imageCaptionData:[{
                 id: "", 
                 caption:""
-              }]
+              }], 
+            userData:{
+                 id: "17841447580010015",   //enter authorized user-id here
+                 username:""                //username will be generated in componentDidMount() 
+            }  
         }
     }
 
@@ -38,7 +44,7 @@ class Login extends Component{
         let xhr = new XMLHttpRequest(); 
         let that = this; 
         
-        let baseUrl = "https://graph.instagram.com/me/media?fields=id,caption&access_token="+this.state.accessToken; 
+        let baseUrl = "https://graph.instagram.com/me/media?fields=id,caption&access_token="+that.state.accessToken; 
         xhr.addEventListener("readystatechange", function(){
             if(this.readyState ===4){
               var joined = that.state.imageCaptionData.concat(JSON.parse(this.responseText).data); 
@@ -50,6 +56,19 @@ class Login extends Component{
         xhr.open("GET", baseUrl); 
         xhr.setRequestHeader("Cache-Control", "no-cache"); 
         xhr.send(data);   
+
+        let getUsernameUrl = "https://graph.instagram.com/"+that.state.userData.id+"?fields=id,username&access_token="+that.state.accessToken; 
+        let uData = null; 
+        let uXhr = new XMLHttpRequest(); 
+        uXhr.addEventListener("readystatechange", function(){
+            if(this.readyState ===4){
+                that.setState({loggedinUsername : JSON.parse(this.responseText).username}); 
+            }
+        }); 
+        uXhr.open("GET",getUsernameUrl); 
+        uXhr.setRequestHeader("Cache-Control", "no-cache"); 
+        uXhr.send(uData); 
+
     }    
 
     inputUsernameChangeHandler = (e) =>{
@@ -67,7 +86,7 @@ class Login extends Component{
          this.state.username === "user1"  && this.state.password === "user1" ? this.setState({allFieldsCorrect: "yes"}) : this.setState({incorrectUsernamePassword: "dispBlock", allFieldsCorrect: "no"}); 
 
           if(this.state.allFieldsCorrect === "yes"){
-             ReactDOM.render(<Home currentusername={this.state.username} imageCaptionData={this.state.imageCaptionData} accessToken={this.state.accessToken}/>, document.getElementById('root'));  
+             ReactDOM.render(<Home currentusername={this.state.loggedinUsername} imageCaptionData={this.state.imageCaptionData} accessToken={this.state.accessToken}/>, document.getElementById('root'));  
           }
     }
 

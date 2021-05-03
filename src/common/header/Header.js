@@ -17,16 +17,17 @@ import ReactDOM from 'react-dom';
 
 
 class Header extends Component{ 
-    constructor(){
-        super(); 
+    constructor(props){
+        super(props); 
         this.state={ 
             search: "",
             dispflag:"dispNone", 
             value: "", 
-            option:""
+            option:"",  
     } 
 
     }
+
 
     inputSearchChangeHandler = (e) =>{
         this.setState({search: e.target.value});       
@@ -37,7 +38,7 @@ class Header extends Component{
     }
       
    selectProfileHandler = () =>{
-            ReactDOM.render(<Profile  currentusername={this.props.currentusername} commentArray={this.props.commentArray}/>, document.getElementById('root')); 
+            ReactDOM.render(<Profile  currentusername={this.props.currentusername} imageData={this.props.imageData} imageCaptionData={this.props.imageCaptionData} commentArray={this.props.commentArray}/>, document.getElementById('root')); 
     }
 
     selectLogoutHandler = () => {
@@ -45,7 +46,7 @@ class Header extends Component{
     }  
 
     imageViewHandler = () =>{
-        ReactDOM.render(<Home currentusername={this.props.currentusername}/>, document.getElementById('root')); 
+        ReactDOM.render(<Home currentusername={this.props.currentusername} imageData={this.props.imageData} imageCaptionData={this.props.imageCaptionData}/>, document.getElementById('root')); 
     }
    /**
     * The <Header> element takes the property 'flag'

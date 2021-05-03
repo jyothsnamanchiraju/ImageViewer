@@ -111,7 +111,7 @@ newCommentHandler =  (e) =>{
         return (
             <div> 
               <div className="home-hdr">
-                <Header flag="homePage"  currentusername={this.props.currentusername} commentArray={this.state.commentArray}/>
+                <Header flag="homePage"  currentusername={this.props.currentusername} imageData={this.state.imageData} imageCaptionData={this.state.imageCaptionData} commentArray={this.state.commentArray}/>
               </div>
               <div className="home-body">
               <div className="grid-root">
