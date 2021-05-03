@@ -58,7 +58,7 @@ addCommentHandler =() =>{
 }
 
 newCommentHandler =  (e) =>{
-  console.log(e.target.value); 
+  
   this.setState({username: this.props.currentusername, imageid: e.target.id, cmt: e.target.value }); 
 }
 
