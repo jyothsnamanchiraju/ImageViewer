@@ -19,8 +19,8 @@ import Input from '@material-ui/core/Input';
 
 class Profile extends Component{
 
-    constructor(){
-        super(); 
+    constructor(props){
+        super(props); 
         this.state={
             editFullNamemodalOpen: false, 
             editImagemodalOpen: false, 
@@ -40,7 +40,20 @@ class Profile extends Component{
                 username: "",
                 imageid:"", 
                 cmt: ""
-              }]
+            }],
+
+            imageData:[{
+                id: "",
+                media_type: "",
+                media_url: "",
+                username: "",
+                timestamp: ""
+              }],   
+            
+             imageCaptionData:[{
+                  id: "", 
+                  caption:""
+                }]  
         }
     }
     editUsernameHandler= ()=>{
@@ -144,7 +157,7 @@ class Profile extends Component{
         return (
         <div>
             <div className="profile-hdr">
-                <Header flag="profilePage" currentusername={this.props.currentusername}/>
+                <Header flag="profilePage" currentusername={this.props.currentusername} imageData={this.state.imageData} imageCaptionData={this.state.imageCaptionData}/>
             </div>
             <div className="profile-body"> 
                     <div className="profile-information-section"> 
