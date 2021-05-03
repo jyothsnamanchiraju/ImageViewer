@@ -26,6 +26,7 @@ class Profile extends Component{
             editImagemodalOpen: false, 
             userFullName: "Full Name", 
             fullname: "",
+            newcomment:"",
             imageObj: {
                 id: "",
                 media_type:"",
@@ -63,6 +64,24 @@ class Profile extends Component{
      iC= imageCaption.data.filter((d)=>{return(d.id === img.id)})[0]; 
      this.setState({editImagemodalOpen: true, imageObj: img, imageCaption: iC.caption, commentArray: commentArr});  
    } 
+
+   updatecmtHandler = (e) =>{
+       this.setState({newcomment: e.target.value}); 
+   }
+
+   addNewCommentHandler =() =>{
+       let cmtObj = {
+        username: "",
+        imageid:"", 
+        cmt: ""
+      }
+      cmtObj.username = this.state.imageObj.username; 
+      cmtObj.imageid = this.state.imageObj.id; 
+      cmtObj.cmt = this.state.newcomment;  
+
+      this.setState({commentArray: [...this.state.commentArray, cmtObj]}); 
+      this.setState({newcomment:""}); 
+   }
 
     closeImageModalHandler = () =>{
         this.setState({editImagemodalOpen: false});
@@ -105,7 +124,7 @@ class Profile extends Component{
                                             <div style={{color:'#64D4E3', fontSize:'15px'}}> #hashtags </div>
                                             <div style={{width:'100%', height:'70%', color:'black'}}>
                                                 {
-                                             commentArr.filter(c =>(c.imageid === this.state.imageObj.id)).map((cObj) =>(
+                                             this.state.commentArray.filter(c =>(c.imageid === this.state.imageObj.id)).map((cObj) =>(
                                                 <li><b>{cObj.username}</b> : {cObj.cmt} </li> ))             
                                              }
                                             </div>
@@ -113,8 +132,8 @@ class Profile extends Component{
                                             <FavoriteBorderOutlinedIcon fontSize="large"/> <span > likes </span>
                                             </div>
                                             <div style={{display:'flex', flexDirection:'row', justifyContent: 'space-between'}}>
-                                                <Input id="addcomment" placeholder="Add a comment" type="text"></Input>
-                                                <Button variant="contained" color="primary">Add</Button>
+                                                <Input id="addcomment" placeholder="Add a comment" type="text" value={this.state.newcomment} onChange={this.updatecmtHandler}></Input>
+                                                <Button variant="contained" color="primary" onClick={this.addNewCommentHandler}>Add</Button>
                                             </div>         
                                         </div>    
                                 </div>
