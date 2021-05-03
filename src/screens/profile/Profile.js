@@ -24,6 +24,8 @@ class Profile extends Component{
         this.state={
             editFullNamemodalOpen: false, 
             editImagemodalOpen: false, 
+            userFullName: "Full Name", 
+            fullname: "",
             imageObj: {
                 id: "",
                 media_type:"",
@@ -44,6 +46,14 @@ class Profile extends Component{
         this.setState({editFullNamemodalOpen: true}); 
     }
 
+    changeUserFullnameHandler =(e) =>{ 
+        this.setState({fullname: e.target.value}); 
+    }
+ 
+    updateFullnameHandler = () =>{
+        this.setState({userFullName: this.state.fullname}); 
+        this.setState({editFullNamemodalOpen: false});
+    }
     closeModalHandler= () =>{
         this.setState({editFullNamemodalOpen: false});
     }
@@ -67,11 +77,11 @@ class Profile extends Component{
             <div className="disp-modal">
               <h2 id="modal-title" style={{alignItems:'center', margin:'10px'}}>Edit</h2>
               <div style={{margin:'10px'}}>
-              <Input id="modal-content" type="text" placeholder="Full Name" onChange={this.editUserFullnameChangeHandler}>
+              <Input id="modal-content" type="text" placeholder="Full Name" value ={this.state.fullname} onChange={this.changeUserFullnameHandler}>
               </Input>
               </div>
               <div style={{margin:'10px', alignItems:'center'}}>
-              <Button variant="contained" color="primary"> Update </Button>
+              <Button variant="contained" color="primary" onClick={this.updateFullnameHandler}> Update </Button>
               </div>
             </div>
           );
@@ -132,7 +142,7 @@ class Profile extends Component{
                                     <div> Followed By:  </div>
                                 </div>
                                 <div>
-                                    <span>   User Full Name   </span>
+                                    <span>   {this.state.userFullName}   </span>
                                     <Button variant="outlined" color="secondary" aria-label="edit" onClick={this.editUsernameHandler}>
                                     <EditIcon />
                                     </Button>
